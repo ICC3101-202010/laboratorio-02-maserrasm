@@ -181,130 +181,149 @@ namespace Lab2MSSM
 
         public bool GenerarPlaylist(string criterio, string valorCriterio, string nombrePlaylist)
         {
+
             //Genero nueva playlist.
-            Playlist pList = new Playlist(nombrePlaylist);
 
-            //Recorro la lista de canciones y voy agregando a la playlist las que cumplan con el criterio. 
+            if (string.Compare("genero", criterio) == 0 | string.Compare("artista", criterio) == 0 | string.Compare("album", criterio) == 0 | string.Compare("nombre", criterio) == 0) {
 
-            //Primero recorro la lista de playlist ya existente y veo que no exista ninguna con el mismo nombre. 
-            for (int k = 0; k < playlistData.Count; k++)
-            {
-                string locName = playlistData[k].getName();
-                int checkName = string.Compare(locName, nombrePlaylist);
-                if (checkName == 0)
+                Playlist pList = new Playlist(nombrePlaylist);
+
+                //Recorro la lista de canciones y voy agregando a la playlist las que cumplan con el criterio. 
+
+                //Primero recorro la lista de playlist ya existente y veo que no exista ninguna con el mismo nombre. 
+                for (int k = 0; k < playlistData.Count; k++)
                 {
-                    Console.WriteLine("No se pudo crear playlist, pues ya existe una con este nombre. ");
-                    return false;
-                }
-                else { continue; }
-            }
-
-            //Habiendo checkeado lo anterior, agrego canciones a playlist segun el criterio que tenga. 
-
-            if (criterio == "genero")
-            {
-                for (int i = 0; i < songData.Count; i++)
-                {
-                    string name = songData[i].getGen();
-                    int filter = string.Compare(name, valorCriterio);
-                    if (filter == 0)
+                    string locName = playlistData[k].getName();
+                    int checkName = string.Compare(locName, nombrePlaylist);
+                    if (checkName == 0)
                     {
-                        pList.addSong(songData[i]);
+                        Console.WriteLine("No se pudo crear playlist, pues ya existe una con este nombre. ");
+                        return false;
+                    }
+                    else { continue; }
+                }
+
+                //Habiendo checkeado lo anterior, agrego canciones a playlist segun el criterio que tenga. 
+
+                if (criterio == "genero")
+                {
+                    for (int i = 0; i < songData.Count; i++)
+                    {
+                        string name = songData[i].getGen();
+                        int filter = string.Compare(name, valorCriterio);
+                        if (filter == 0)
+                        {
+                            pList.addSong(songData[i]);
+                        }
+                    }
+                    if (pList.songPlayList.Count() == 0)
+                    {
+                        Console.WriteLine("No hay canciones que cumplan criterio, por ende no se creo playlist.");
+                        return false;
                     }
                 }
-                if (pList.songPlayList.Count() == 0)
-                {
-                    Console.WriteLine("No hay canciones que cumplan criterio, por ende ninguna se agrego a playlist.");
-                }
-            }
 
-            if (criterio == "nombre")
-            {
-                for (int i = 0; i < songData.Count; i++)
+                if (criterio == "nombre")
                 {
-                    string name = songData[i].getName();
-                    int filter = string.Compare(name, valorCriterio);
-                    if (filter == 0)
+                    for (int i = 0; i < songData.Count; i++)
                     {
-                        pList.addSong(songData[i]);
+                        string name = songData[i].getName();
+                        int filter = string.Compare(name, valorCriterio);
+                        if (filter == 0)
+                        {
+                            pList.addSong(songData[i]);
+                        }
+                    }
+                    if (pList.songPlayList.Count() == 0)
+                    {
+                        Console.WriteLine("No hay canciones que cumplan criterio, por ende no se creo playlist.");
+                        return false;
                     }
                 }
-                if (pList.songPlayList.Count() == 0)
-                {
-                    Console.WriteLine("No hay canciones que cumplan criterio, por ende ninguna se agrego a playlist.");
-                }
-            }
 
-            if (criterio == "artista")
-            {
-                for (int i = 0; i < songData.Count; i++)
+                if (criterio == "artista")
                 {
-                    string name = songData[i].getArtist();
-                    int filter = string.Compare(name, valorCriterio);
-                    if (filter == 0)
+                    for (int i = 0; i < songData.Count; i++)
                     {
-                        pList.addSong(songData[i]);
+                        string name = songData[i].getArtist();
+                        int filter = string.Compare(name, valorCriterio);
+                        if (filter == 0)
+                        {
+                            pList.addSong(songData[i]);
+                        }
+                    }
+                    if (pList.songPlayList.Count() == 0)
+                    {
+                        Console.WriteLine("No hay canciones que cumplan criterio, por ende no se creo playlist.");
+                        return false;
                     }
                 }
-                if (pList.songPlayList.Count() == 0)
-                {
-                    Console.WriteLine("No hay canciones que cumplan criterio, por ende ninguna se agrego a playlist.");
-                }
-            }
 
-            if (criterio == "album")
-            {
-                for (int i = 0; i < songData.Count; i++)
+                if (criterio == "album")
                 {
-                    string name = songData[i].getAlbum();
-                    int filter = string.Compare(name, valorCriterio);
-                    if (filter == 0)
+                    for (int i = 0; i < songData.Count; i++)
                     {
-                        pList.addSong(songData[i]);
+                        string name = songData[i].getAlbum();
+                        int filter = string.Compare(name, valorCriterio);
+                        if (filter == 0)
+                        {
+                            pList.addSong(songData[i]);
+                        }
+                    }
+                    if (pList.songPlayList.Count() == 0)
+                    {
+                        Console.WriteLine("No hay canciones que cumplan criterio, por ende no se creo playlist.");
+                        return false;
                     }
                 }
-                if (pList.songPlayList.Count() == 0)
-                {
-                    Console.WriteLine("No hay canciones que cumplan criterio, por ende ninguna se agrego a playlist.");
-                }
-            }
 
-            playlistData.Add(pList);
-            return true;
+                playlistData.Add(pList);
+                return true;
+
+
+
+            }
+            
+            else { Console.WriteLine("Criterio invalido") ; return false; }
+
 
         }
 
         public string VerMisPlaylists()
         {
+
+            string masterString = "";    
             for (int j = 0; j < playlistData.Count; j++)
             {
                 List<Cancion> cancionesPlaylistK = playlistData[j].songPlayList;
                 Console.WriteLine("Playlist Numero "); Console.WriteLine(j);
+                masterString += "Playlist Numero "; masterString += j; 
                 Console.WriteLine("De nombre: "); Console.WriteLine(playlistData[j].getName());
 
                 for (int z = 0; z < cancionesPlaylistK.Count; z++) {
                     Console.WriteLine(cancionesPlaylistK[z].Informacion());
+                    masterString += cancionesPlaylistK[z].Informacion();
                 }
 
                 Console.WriteLine("");
             }
-            return "";
+            return masterString;
         }
     }
 
-
     class Playlist {
 
-        //Declaro nombre y lista de canciones.
-
-        public string playlistName;
-        public List<Cancion> songPlayList;
+        //Declaro nombre de playlist y lista de canciones.
+        
+        public List<Cancion> songPlayList ;
+        public string playlistName; 
 
         // El constructor de la playlist.
-        public Playlist(string name)
-        {
+        public Playlist(string pn)
+        {   
             List<Cancion> songs = new List<Cancion>();
             songPlayList = songs;
+            playlistName = pn;
         }
 
         //Metodo para obtener nombre.
@@ -328,8 +347,20 @@ namespace Lab2MSSM
             int userChoice = 0;
             while (userChoice == 0)
             {
-
                 // Menu principal
+
+
+                Cancion test1 = new Cancion("Los Pollitos Dicen", "Primero", "Autor 1", "Dormir"); dataBase.AgregarCancion(test1);
+                Cancion test2 = new Cancion("Los Pepitos Dicen", "Primero", "Autor 1", "Dormir"); dataBase.AgregarCancion(test2);
+                Cancion test3 = new Cancion("Los Sauces Dicen", "Primero", "Autor 1", "Dormir"); dataBase.AgregarCancion(test3);
+
+                Cancion test4 = new Cancion("Las guaguas cantan", "Segundo", "Autor 1", "Dormir"); dataBase.AgregarCancion(test4);
+                Cancion test5 = new Cancion("Las guaguas comen", "Segundo", "Autor 3", "Dormir"); dataBase.AgregarCancion(test5);
+
+                Cancion test6 = new Cancion("Los niños dicen", "Tercero", "Autor 2", "Cantar"); dataBase.AgregarCancion(test6);
+                Cancion test7 = new Cancion("Los niños comen", "Primero", "Autor 2", "Cantar"); dataBase.AgregarCancion(test7);
+                Cancion test8 = new Cancion("Los niños beben", "Cuarto", "Autor 3", "Dormir"); dataBase.AgregarCancion(test8);
+
 
                 Console.WriteLine("Bienvenido Usuario !!");
                 Console.WriteLine("Ingrese 1 para agregar nueva cancion.");
@@ -380,9 +411,9 @@ namespace Lab2MSSM
 
                 //Opcion para crear playlists. 
 
-                while (userChoice == 3)
+                while (userChoice == 4)
                 {
-                    Console.WriteLine("Ingrese criterio: "); string crit = Console.ReadLine();
+                    Console.WriteLine("Ingrese criterio: "); string crit = Console.ReadLine().ToLower();
                     Console.WriteLine("Ingrese valor: "); string val = Console.ReadLine();
                     Console.WriteLine("Ingrese nombre de playlist: "); string pName = Console.ReadLine();
 
@@ -390,19 +421,14 @@ namespace Lab2MSSM
 
                     Console.WriteLine("Ingrese 0 para salir");
                     userChoice = Convert.ToInt32(Console.ReadLine());
-
                 }
 
-                while (userChoice == 4)
+                while (userChoice == 5)
                 {
                     dataBase.VerMisPlaylists();
                     Console.WriteLine("Ingrese 0 para salir");
                     userChoice = Convert.ToInt32(Console.ReadLine());
-
                 }
-
-
-
 
                 // Opcion para terminar programa si asi lo deseo. 
                 if (userChoice == 6)
