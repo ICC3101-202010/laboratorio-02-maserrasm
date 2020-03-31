@@ -25,6 +25,8 @@ namespace Lab2MSSM
             return songInfo;
         }
 
+        //Algunas funciones auxiliares que son de utilidad. 
+
         public String getName()
         {
             string songName = nombre;
@@ -53,7 +55,7 @@ namespace Lab2MSSM
 
     class Espotifai
     {
-        // Defino lista songData, donde guardare objetos de tipo cancion.
+        // Defino lista songData, corresponde a la base de datos principal donde guardare todos los objetos de tipo cancion del gestor.
         public List<Cancion> songData;
         public List<Playlist> playlistData; 
 
@@ -107,6 +109,9 @@ namespace Lab2MSSM
 
         public List<Cancion> CancionesPorCriterio(String criterio, String valor)
         {
+            //Recorro songData (lista de todos los objetos tipo cancion que existen en el gestor)
+            // y voy ingresando a una lista auxiliar todas las canciones que cumplan con el criterio, luego retorno aquella lista. 
+
             List<Cancion> FilteredSongList = new List<Cancion>();
             if (criterio == "nombre")
             {
@@ -182,9 +187,11 @@ namespace Lab2MSSM
         public bool GenerarPlaylist(string criterio, string valorCriterio, string nombrePlaylist)
         {
 
-            //Genero nueva playlist.
+            //Primero veo que el criterio ingresado sea valido, en caso de que no lo sea retorno false e imprimo mensaje de error. 
 
             if (string.Compare("genero", criterio) == 0 | string.Compare("artista", criterio) == 0 | string.Compare("album", criterio) == 0 | string.Compare("nombre", criterio) == 0) {
+
+                //Si criterio es valido, genero nueva playlist.
 
                 Playlist pList = new Playlist(nombrePlaylist);
 
@@ -292,6 +299,9 @@ namespace Lab2MSSM
         public string VerMisPlaylists()
         {
 
+            //Recorro playlists existentes y para cada una veo informacion de canciones. Agrego esta info a un string 
+            // que luego ha de ser retornado por la funcion. 
+
             string masterString = "";    
             for (int j = 0; j < playlistData.Count; j++)
             {
@@ -349,17 +359,16 @@ namespace Lab2MSSM
             {
                 // Menu principal
 
+                //Algunas canciones de prueba. 
 
-                Cancion test1 = new Cancion("Los Pollitos Dicen", "Primero", "Autor 1", "Dormir"); dataBase.AgregarCancion(test1);
-                Cancion test2 = new Cancion("Los Pepitos Dicen", "Primero", "Autor 1", "Dormir"); dataBase.AgregarCancion(test2);
-                Cancion test3 = new Cancion("Los Sauces Dicen", "Primero", "Autor 1", "Dormir"); dataBase.AgregarCancion(test3);
-
-                Cancion test4 = new Cancion("Las guaguas cantan", "Segundo", "Autor 1", "Dormir"); dataBase.AgregarCancion(test4);
-                Cancion test5 = new Cancion("Las guaguas comen", "Segundo", "Autor 3", "Dormir"); dataBase.AgregarCancion(test5);
-
-                Cancion test6 = new Cancion("Los niños dicen", "Tercero", "Autor 2", "Cantar"); dataBase.AgregarCancion(test6);
-                Cancion test7 = new Cancion("Los niños comen", "Primero", "Autor 2", "Cantar"); dataBase.AgregarCancion(test7);
-                Cancion test8 = new Cancion("Los niños beben", "Cuarto", "Autor 3", "Dormir"); dataBase.AgregarCancion(test8);
+                //Cancion test1 = new Cancion("Los Pollitos Dicen", "Primero", "Autor 1", "Dormir"); dataBase.AgregarCancion(test1);
+                //Cancion test2 = new Cancion("Los Pepitos Dicen", "Primero", "Autor 1", "Dormir"); dataBase.AgregarCancion(test2);
+                //Cancion test3 = new Cancion("Los Sauces Dicen", "Primero", "Autor 1", "Dormir"); dataBase.AgregarCancion(test3);
+                //Cancion test4 = new Cancion("Las guaguas cantan", "Segundo", "Autor 1", "Dormir"); dataBase.AgregarCancion(test4);
+                //Cancion test5 = new Cancion("Las guaguas comen", "Segundo", "Autor 3", "Dormir"); dataBase.AgregarCancion(test5);
+                //Cancion test6 = new Cancion("Los niños dicen", "Tercero", "Autor 2", "Cantar"); dataBase.AgregarCancion(test6);
+                //Cancion test7 = new Cancion("Los niños comen", "Primero", "Autor 2", "Cantar"); dataBase.AgregarCancion(test7);
+                //Cancion test8 = new Cancion("Los niños beben", "Cuarto", "Autor 3", "Dormir"); dataBase.AgregarCancion(test8);
 
 
                 Console.WriteLine("Bienvenido Usuario !!");
